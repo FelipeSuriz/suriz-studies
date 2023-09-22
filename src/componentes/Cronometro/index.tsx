@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 
 interface Props {
     selecionado: ITarefa | undefined
+    finalizaTarefa: () => void
 }
 
-export default function Cronometro({ selecionado }: Props) {
+export default function Cronometro({ selecionado, finalizaTarefa }: Props) {
     const [tempo, setTempo] = useState<number>();
 
     useEffect(() => {
@@ -22,8 +23,9 @@ export default function Cronometro({ selecionado }: Props) {
         setTimeout(() => {
             if (contador > 0) {
                 setTempo(contador - 1)
-                return regressiva(contador -1)
+                return regressiva(contador - 1)
             }
+            finalizaTarefa()
         }, 1000)
     }
 
